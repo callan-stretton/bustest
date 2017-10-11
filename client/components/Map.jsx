@@ -10,19 +10,19 @@ export default class Map extends React.Component {
         lat: -41.2865,
         lng: 174.7762
       }
-      busLocation: {
-        lat: -41.286924,
-        lng: 174.776102
-      }
+      // busLocation: {
+      //   lat: -41.286924,
+      //   lng: 174.776102
+      // }
     }
-    this.currentBusLocation = this.currentBusLocation.bind(this)
+    // this.currentBusLocation = this.currentBusLocation.bind(this)
   }
-  currentBusLocation(busLocation) {
-    this.getBusLocation (busLocation, (err, res) => {
-      console.log(err, res, this.state)
-      this.setState(busLocation: res.services[0].lat .long)
-    })
-  }
+  // currentBusLocation(busLocation) {
+  //   this.getBusLocation (busLocation, (err, res) => {
+  //     console.log(err, res, this.state)
+  //     this.setState(busLocation: res.services[0].lat .long)
+  //   })
+  // }
 
   componentDidMount () {
     this.loadMap(this.state.center, this.state.busLocation)
@@ -33,7 +33,11 @@ export default class Map extends React.Component {
       zoom: 14
     })
     this.marker = new google.maps.Marker({
-      position: busLocation,
+      // position: busLocation,
+      position: {
+        lat: -41.286924,
+         lng: 174.776102
+        },
       map: this.map,
       title: 'Bus'
     })
