@@ -35,10 +35,14 @@ export default class Map extends React.Component {
     this.marker = new google.maps.Marker({
       // position: busLocation,
       position: {
-        lat: -41.286924,
-         lng: 174.776102
+        lat: -41.296924,
+        lng: 174.774102
         },
       map: this.map,
+      icon: {
+        url: './images/bus-icon.png',
+        scaledSize: new google.maps.Size(50, 50)
+      },
       title: 'Bus'
     })
   }
