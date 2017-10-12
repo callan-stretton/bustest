@@ -8,23 +8,13 @@ export default class Map extends React.Component {
     super(props)
     this.state = {
       center: {
-        lat: -41.2865,
+        lat: -41.2975,
         lng: 174.7762
       },
       services: []
-      // busLocation: {
-      //   lat: -41.286924,
-      //   lng: 174.776102
-      // }
     }
-    // this.currentBusLocation = this.currentBusLocation.bind(this)
   }
-  // currentBusLocation(busLocation) {
-  //   this.getBusLocation (busLocation, (err, res) => {
-  //     console.log(err, res, this.state)
-  //     this.setState(busLocation: res.services[0].lat .long)
-  //   })
-  // }
+
   startTicking () {
     setInterval(() => {
       console.log('tick')
@@ -54,7 +44,7 @@ export default class Map extends React.Component {
     console.log(this.state)
     this.map = new google.maps.Map(this.refs.map, {
       center: center,
-      zoom: 14,
+      zoom: 13,
       styles: [
         { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
         { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
@@ -142,7 +132,6 @@ export default class Map extends React.Component {
       console.log(moment2.format())
 
       new google.maps.Marker({
-        // position: busLocation,
         position: {
           lat: Number(service.Lat),
           lng: Number(service.Long)
@@ -150,7 +139,7 @@ export default class Map extends React.Component {
         map: this.map,
         icon: {
           url: (service.HasStarted === true) ? './images/bus-icon2.png' : './images/bus-icon.png',
-          scaledSize: new google.maps.Size(50, 50)
+          scaledSize: new google.maps.Size(30, 30)
         },
         title: 'Bus'
       })
