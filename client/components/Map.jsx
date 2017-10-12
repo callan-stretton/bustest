@@ -25,28 +25,29 @@ export default class Map extends React.Component {
   //     this.setState(busLocation: res.services[0].lat .long)
   //   })
   // }
-  startTicking() {
+  startTicking () {
     setInterval(() => {
       console.log('tick')
       if (this.props.busNumber) this.updateBus()
     }, 10000)
   }
-  updateBus() {
+  updateBus () {
     console.log(this.props.busNumber)
-    if (this.props.busNumber) getBusLocation(this.props.busNumber, (err, data) => {
-      this.setState({ services: data.Services })
-    })
-    else this.setState({services:[]})
+    if (this.props.busNumber) {
+      getBusLocation(this.props.busNumber, (err, data) => {
+        this.setState({ services: data.Services })
+      })
+    } else this.setState({services: []})
   }
   componentDidMount () {
     this.loadMap(this.state.center)
     this.updateBus()
     this.startTicking()
   }
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps (props) {
     this.updateBus()
   }
-  componentDidUpdate() {
+  componentDidUpdate () {
     this.loadMap(this.state.center)
   }
   loadMap (center) {
@@ -66,7 +67,7 @@ export default class Map extends React.Component {
         {
           featureType: 'poi',
           elementType: 'labels.text.fill',
-          stylers: [{ visibility: "off" }] //not working
+          stylers: [{ visibility: 'off' }] // not working
         },
         {
           featureType: 'poi.park',
@@ -145,7 +146,7 @@ export default class Map extends React.Component {
         position: {
           lat: Number(service.Lat),
           lng: Number(service.Long)
-          },
+        },
         map: this.map,
         icon: {
           url: (service.HasStarted === true) ? './images/bus-icon2.png' : './images/bus-icon.png',
@@ -153,7 +154,6 @@ export default class Map extends React.Component {
         },
         title: 'Bus'
       })
-
     })
   }
   render () {
