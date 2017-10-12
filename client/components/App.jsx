@@ -4,8 +4,8 @@ import Map from './Map'
 
 const App = () => {
   return (
-    <div>
-      <h1>Where is my bus?</h1>
+    <div className='appContainer'>
+      <h1 className='appTitle'>Where is my bus?</h1>
       <Map />
     </div>
   )
