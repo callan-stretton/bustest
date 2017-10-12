@@ -4,6 +4,7 @@ body {
 }
 
 .appTitle {
+  font-family: 'Acme', sans-serif;
   color: wheat;
 }
 
