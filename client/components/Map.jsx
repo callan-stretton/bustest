@@ -9,7 +9,8 @@ export default class Map extends React.Component {
       center: {
         lat: -41.2865,
         lng: 174.7762
-      }
+      },
+      services: []
       // busLocation: {
       //   lat: -41.286924,
       //   lng: 174.776102
@@ -23,11 +24,31 @@ export default class Map extends React.Component {
   //     this.setState(busLocation: res.services[0].lat .long)
   //   })
   // }
-
-  componentDidMount () {
-    this.loadMap(this.state.center, this.state.busLocation)
+  startTicking() {
+    setInterval(() => {
+      console.log('tick')
+      if (this.props.busNumber) this.updateBus()
+    }, 30000)
   }
-  loadMap (center, busLocation) {
+  updateBus() {
+    getBusLocation(this.props.busNumber, (err, data) => {
+      this.setState({ services: data.Services })
+    })
+  }
+  componentDidMount () {
+    this.loadMap(this.state.center)
+    this.updateBus()
+    this.startTicking()
+  }
+  componentWillReceiveProps(props) {
+    this.setState({services: []})
+    this.updateBus()
+  }
+  componentDidUpdate() {
+    this.loadMap(this.state.center)
+  }
+  loadMap (center) {
+    console.log(this.state)
     this.map = new google.maps.Map(this.refs.map, {
       center: center,
       zoom: 14,
@@ -112,24 +133,26 @@ export default class Map extends React.Component {
         }
       ]
     })
-    this.marker = new google.maps.Marker({
-      // position: busLocation,
-      position: {
-        lat: -41.296924,
-        lng: 174.774102
+    this.state.services.map((service) => {
+      new google.maps.Marker({
+        // position: busLocation,
+        position: {
+          lat: Number(service.Lat),
+          lng: Number(service.Long)
+          },
+        map: this.map,
+        icon: {
+          url: (service.HasStarted === true) ? './images/bus-icon2.png' : './images/bus-icon.png',
+          scaledSize: new google.maps.Size(50, 50)
         },
-      map: this.map,
-      icon: {
-        url: './images/bus-icon2.png',
-        scaledSize: new google.maps.Size(50, 50)
-      },
-      title: 'Bus'
+        title: 'Bus'
+      })
+
     })
   }
   render () {
     return (
       <div>
-        {/* <h3>The Map Component</h3> */}
         <div className="map" style={{width: '80vh', height: '80vh'}} ref="map" > I should show a Map</div>
       </div>
     )

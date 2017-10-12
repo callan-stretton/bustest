@@ -25,6 +25,7 @@
     "babel-register": "^6.18.0",
     "enzyme": "^2.7.0",
     "jsx-loader": "^0.13.2",
+    "moment": "^2.19.1",
     "nodemon": "^1.11.0",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
