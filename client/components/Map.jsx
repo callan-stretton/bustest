@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { getBusLocation } from '../api'
+import moment from 'moment'
 
 export default class Map extends React.Component {
   constructor (props) {
@@ -28,12 +29,14 @@ export default class Map extends React.Component {
     setInterval(() => {
       console.log('tick')
       if (this.props.busNumber) this.updateBus()
-    }, 30000)
+    }, 10000)
   }
   updateBus() {
-    getBusLocation(this.props.busNumber, (err, data) => {
+    console.log(this.props.busNumber)
+    if (this.props.busNumber) getBusLocation(this.props.busNumber, (err, data) => {
       this.setState({ services: data.Services })
     })
+    else this.setState({services:[]})
   }
   componentDidMount () {
     this.loadMap(this.state.center)
@@ -41,7 +44,6 @@ export default class Map extends React.Component {
     this.startTicking()
   }
   componentWillReceiveProps(props) {
-    this.setState({services: []})
     this.updateBus()
   }
   componentDidUpdate() {
@@ -134,6 +136,10 @@ export default class Map extends React.Component {
       ]
     })
     this.state.services.map((service) => {
+      const moment1 = moment()
+      const moment2 = moment(service.RecordedAtTime)
+      console.log(moment2.format())
+
       new google.maps.Marker({
         // position: busLocation,
         position: {
