@@ -138,7 +138,7 @@ export default class Map extends React.Component {
         },
         map: this.map,
         icon: {
-          url: (service.HasStarted === true) ? './images/bus-icon2.png' : './images/bus-icon.png',
+          url: (service.HasStarted === false) ? './images/bus-icon-not-in-service.png' : (service.Direction === "Inbound") ? './images/bus-icon-inbound.png' : './images/bus-icon-outbound.png',
           scaledSize: new google.maps.Size(30, 30)
         },
         title: 'Bus ' + service.ServiceID + '\n' + service.Direction
