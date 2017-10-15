@@ -126,6 +126,23 @@ export default class Map extends React.Component {
         }
       ]
     })
+
+    let servicePathCoordinates = [
+              {lat: -41.301412, lng: 174.780972},
+              {lat: -41.300751, lng: 174.778837},
+              {lat: -41.299083, lng: 174.779309},
+              {lat: -41.297157, lng: 174.773591}
+            ];
+    let servicePath = new google.maps.Polyline({
+              path: servicePathCoordinates,
+              geodesic: true,
+              strokeColor: 'yellow',
+              strokeOpacity: 1.0,
+              strokeWeight: 2
+            });
+
+    servicePath.setMap(this.map);
+
     this.state.services.map((service) => {
       const moment1 = moment()
       const moment2 = moment(service.RecordedAtTime)
