@@ -30,3 +30,9 @@ body {
    height: 34px;
    margin-bottom: 20px;
 }
+
+.legend {
+  display: flex;
+  color: white;
+  font-family: 'Arial';
+}

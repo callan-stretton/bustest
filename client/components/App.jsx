@@ -35,6 +35,16 @@ export default class App extends React.Component {
           </select>
         </form>
         <Map busNumber={this.state.busNumber}/>
+        <div className="legend">
+          <img src="images/bus-icon-inbound.png" alt="Inbound" height="30" width="30"/>
+          <h4>Inbound</h4>
+          <br/>
+          <img src="images/bus-icon-outbound.png" alt="Inbound" height="30" width="30"/>
+          <h4>Outbound</h4>
+          <br/>
+          <img src="images/bus-icon-not-in-service.png" alt="Inbound" height="30" width="30"/>
+          <h4>Not in Service</h4>
+        </div>
       </div>
     )
 
