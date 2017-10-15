@@ -127,6 +127,35 @@ export default class Map extends React.Component {
       ]
     })
 
+    // var directionsService = new google.maps.DirectionsService()
+    // var directionsDisplay = new google.maps.DirectionsRenderer({
+    //   map: this.map,
+    //   preserveViewport: true
+    // })
+    // directionsService.route({
+    //   origin: new google.maps.LatLng(-41.287475, 174.775835),
+    //   destination: new google.maps.LatLng(-41.294130, 174.783987),
+    //   waypoints: [{
+    //     stopover: false,
+    //     location: new google.maps.LatLng(-41.291816, 174.779277)
+    //   }],
+    //   travelMode: google.maps.TravelMode.DRIVING
+    // }, function(response, status) {
+    //   if (status === google.maps.DirectionsStatus.OK) {
+    //     // directionsDisplay.setDirections(response);
+    //     var polyline = new google.maps.Polyline({
+    //       path: [],
+    //       strokeColor: 'yellow',
+    //       strokeWeight: 3
+    //     })
+    //     var bounds = new google.maps.LatLngBounds()
+    //
+    //     polyline.setMap(this.map)
+    //   } else {
+    //     console.log('Directions request failed due to ' + status)
+    //   }
+    // })
+
     let servicePathCoordinates = [
               {lat: -41.301412, lng: 174.780972},
               {lat: -41.300751, lng: 174.778837},
