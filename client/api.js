@@ -1,7 +1,5 @@
 import request from 'superagent'
 
-// https://www.metlink.org.nz/api/v1/ServiceLocation/14
-
 export function getBusLocation(busNumber, callback) {
   request
     .get("/api/bus/" + busNumber)
@@ -14,9 +12,3 @@ export function getBusLocation(busNumber, callback) {
       }
     })
 }
-
-// export function getBusLocation (busNumber, callback) {
-//   request 
-//     .post("https://www.metlink.org.nz/api/v1/ServiceLocation/")
-//     .send('14')
-// }

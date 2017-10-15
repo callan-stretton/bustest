@@ -17,8 +17,8 @@ export default class App extends React.Component {
       <div className='appContainer'>
         <h1 className='appTitle'>Where is my bus?</h1>
         <form>
-          Bus Service: <select onChange={this.updateBusNumber.bind(this)}name="BusService">
-            <option selected disabled >Select your Service :)</option>
+          <select onChange={this.updateBusNumber.bind(this)}name="BusService" className="selector">
+            <option selected disabled >Bus Service</option>
             <option value="1">1 Island Bay - Wellington</option>
             <option value="2">2 Miramar - Wellington</option>
             <option value="3">3 Karori - Wellington - Lyall Bay</option>
@@ -40,6 +40,3 @@ export default class App extends React.Component {
 
   }
 }
-
-
-
