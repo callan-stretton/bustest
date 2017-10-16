@@ -3,6 +3,8 @@ import React from 'react'
 import { getBusLocation } from '../api'
 import moment from 'moment'
 
+import bus24 from '../../server/bus-routes/bus24'
+
 export default class Map extends React.Component {
   constructor (props) {
     super(props)
@@ -156,12 +158,7 @@ export default class Map extends React.Component {
     //   }
     // })
 
-    let servicePathCoordinates = [
-              {lat: -41.301412, lng: 174.780972},
-              {lat: -41.300751, lng: 174.778837},
-              {lat: -41.299083, lng: 174.779309},
-              {lat: -41.297157, lng: 174.773591}
-            ];
+    let servicePathCoordinates = bus24;
     let servicePath = new google.maps.Polyline({
               path: servicePathCoordinates,
               geodesic: true,
