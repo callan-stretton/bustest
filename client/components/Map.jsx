@@ -130,6 +130,7 @@ export default class Map extends React.Component {
         }
       ]
     })
+    // let coords = busStation[this.props.busNumber]
 
     let servicePathCoordinates = bus1
     let servicePath = new google.maps.Polyline({
