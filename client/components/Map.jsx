@@ -9,10 +9,12 @@ import bus3 from '../../server/bus-routes/bus3'
 import bus4 from '../../server/bus-routes/bus4'
 import bus6 from '../../server/bus-routes/bus6'
 import bus7 from '../../server/bus-routes/bus7'
-import bus17 from '../../server/bus-routes/bus17' // not correct route ?
 import bus14 from '../../server/bus-routes/bus14'
+import bus17 from '../../server/bus-routes/bus17' // not correct route ?
 import bus24 from '../../server/bus-routes/bus24'
 import bus43 from '../../server/bus-routes/bus43'
+
+import busService from '../../server/busService'
 
 export default class Map extends React.Component {
   constructor (props) {
@@ -137,9 +139,9 @@ export default class Map extends React.Component {
         }
       ]
     })
-    // let coords = busStation[this.props.busNumber]
+    // let coords = busService[this.props.busNumber]
 
-    let servicePathCoordinates = bus14
+    let servicePathCoordinates = busService[this.props.busNumber]
     let servicePath = new google.maps.Polyline({
       path: servicePathCoordinates,
       geodesic: true,
