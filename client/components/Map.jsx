@@ -13,6 +13,7 @@ export default class Map extends React.Component {
         lat: -41.2975,
         lng: 174.7762
       },
+      isInbound: props.isInbound,
       services: []
     }
   }
@@ -39,6 +40,7 @@ export default class Map extends React.Component {
   }
   componentWillReceiveProps (props) {
     this.updateBus(props.busNumber)
+    if (props.isInbound!= this.state.isInbound) this.setState({isInbound: props.isInbound})
   }
   componentDidUpdate () {
     this.renderServices()
@@ -149,7 +151,8 @@ export default class Map extends React.Component {
         if (marker.hasOwnProperty('setMap')) marker.setMap(null); marker.setVisible(false)
       })
     } 
-    this.markers = this.state.services.map((service) => {
+    console.log(this.state.services)
+    this.markers = this.state.services.filter(service => service.Direction == (this.state.isInbound ? "Inbound" : 'Outbound')).map((service) => {
       return new google.maps.Marker({
         position: {
           lat: Number(service.Lat),

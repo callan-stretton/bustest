@@ -6,8 +6,12 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      busNumber: null
+      busNumber: null,
+      isInbound: false,
     }
+  }
+  toggleInbound() {
+    this.setState({isInbound: !this.state.isInbound})
   }
   updateBusNumber(e) {
     this.setState({busNumber: e.target.value})
@@ -33,7 +37,8 @@ export default class App extends React.Component {
             <option value="44">44 Strathmore Park - Wellington - Khandallah (Loop Service)</option>
           </select>
         </form>
-        <Map busNumber={this.state.busNumber}/>
+        <button onClick={this.toggleInbound.bind(this)}>{this.state.isInbound ? "Show Outbound" : "Show Inbound"}</button>
+        <Map busNumber={this.state.busNumber} isInbound={this.state.isInbound} />
         <div className="legend">
           <img src="images/bus-icon-inbound.png" alt="Inbound" height="30" width="30"/>
           <h4>Inbound</h4>
