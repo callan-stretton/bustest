@@ -23,10 +23,10 @@ export default class Map extends React.Component {
       if (this.props.busNumber) this.updateBus()
     }, 10000)
   }
-  updateBus () {
+  updateBus (busNumber) {
     console.log(this.props.busNumber)
-    if (this.props.busNumber) {
-      getBusLocation(this.props.busNumber, (err, data) => {
+    if (busNumber || this.props.busNumber) {
+      getBusLocation(busNumber || this.props.busNumber, (err, data) => {
         // this.state.services.forEach(service => service.setMap(null))
         this.setState({ services: data.Services })
       })
@@ -38,7 +38,7 @@ export default class Map extends React.Component {
     this.updateBus()
   }
   componentWillReceiveProps (props) {
-    this.updateBus()
+    this.updateBus(props.busNumber)
   }
   componentDidUpdate () {
     this.renderServices()
@@ -143,7 +143,6 @@ export default class Map extends React.Component {
       strokeOpacity: 1.0,
       strokeWeight: 3
     })
-    console.log(this.markers)
     this.servicePath.setMap(this.map)
     if (this.markers){
       this.markers.forEach(marker => {
@@ -151,10 +150,6 @@ export default class Map extends React.Component {
       })
     } 
     this.markers = this.state.services.map((service) => {
-      const moment1 = moment()
-      const moment2 = moment(service.RecordedAtTime)
-      console.log(moment2.format())
-
       return new google.maps.Marker({
         position: {
           lat: Number(service.Lat),
