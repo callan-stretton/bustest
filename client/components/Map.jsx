@@ -3,17 +3,6 @@ import React from 'react'
 import { getBusLocation } from '../api'
 import moment from 'moment'
 
-import bus1 from '../../server/bus-routes/bus1'
-import bus2 from '../../server/bus-routes/bus2'
-import bus3 from '../../server/bus-routes/bus3'
-import bus4 from '../../server/bus-routes/bus4'
-import bus6 from '../../server/bus-routes/bus6'
-import bus7 from '../../server/bus-routes/bus7'
-import bus14 from '../../server/bus-routes/bus14'
-import bus17 from '../../server/bus-routes/bus17' // not correct route ?
-import bus24 from '../../server/bus-routes/bus24'
-import bus43 from '../../server/bus-routes/bus43'
-
 import busService from '../../server/busService'
 
 export default class Map extends React.Component {
@@ -44,8 +33,8 @@ export default class Map extends React.Component {
   }
   componentDidMount () {
     this.loadMap(this.state.center)
-    this.updateBus()
     this.startTicking()
+    this.updateBus()
   }
   componentWillReceiveProps (props) {
     this.updateBus()
