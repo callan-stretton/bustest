@@ -13,9 +13,26 @@ body {
   max-width: 900px;
 }
 
-/* .map {
+.map {
   margin: 0 auto;
-  max-width: 900px;
+  /* max-width: 900px; */
   width: '80vh';
   height: '80vh';
-} */
+}
+
+.selector {
+   width: "80vh";
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 34px;
+   margin-bottom: 20px;
+}
+
+.legend {
+  display: flex;
+  color: white;
+  font-family: 'Arial';
+}

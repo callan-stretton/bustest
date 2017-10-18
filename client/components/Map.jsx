@@ -1,36 +1,63 @@
 import React from 'react'
 
 import { getBusLocation } from '../api'
+import moment from 'moment'
+
+import bus1 from '../../server/bus-routes/bus1'
+import bus2 from '../../server/bus-routes/bus2'
+import bus3 from '../../server/bus-routes/bus3'
+import bus4 from '../../server/bus-routes/bus4'
+import bus6 from '../../server/bus-routes/bus6'
+import bus7 from '../../server/bus-routes/bus7'
+import bus14 from '../../server/bus-routes/bus14'
+import bus17 from '../../server/bus-routes/bus17' // not correct route ?
+import bus24 from '../../server/bus-routes/bus24'
+import bus43 from '../../server/bus-routes/bus43'
+
+import busService from '../../server/busService'
 
 export default class Map extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       center: {
-        lat: -41.2865,
+        lat: -41.2975,
         lng: 174.7762
-      }
-      // busLocation: {
-      //   lat: -41.286924,
-      //   lng: 174.776102
-      // }
+      },
+      services: []
     }
-    // this.currentBusLocation = this.currentBusLocation.bind(this)
   }
-  // currentBusLocation(busLocation) {
-  //   this.getBusLocation (busLocation, (err, res) => {
-  //     console.log(err, res, this.state)
-  //     this.setState(busLocation: res.services[0].lat .long)
-  //   })
-  // }
 
-  componentDidMount () {
-    this.loadMap(this.state.center, this.state.busLocation)
+  startTicking () {
+    setInterval(() => {
+      console.log('tick')
+      if (this.props.busNumber) this.updateBus()
+    }, 10000)
   }
-  loadMap (center, busLocation) {
+  updateBus () {
+    console.log(this.props.busNumber)
+    if (this.props.busNumber) {
+      getBusLocation(this.props.busNumber, (err, data) => {
+        this.setState({ services: data.Services })
+      })
+    } else this.setState({services: []})
+  }
+  componentDidMount () {
+    this.loadMap(this.state.center)
+    this.updateBus()
+    this.startTicking()
+  }
+  componentWillReceiveProps (props) {
+    this.updateBus()
+  }
+  componentDidUpdate () {
+    this.loadMap(this.state.center)
+  }
+  loadMap (center) {
+    console.log(this.state)
     this.map = new google.maps.Map(this.refs.map, {
       center: center,
-      zoom: 14,
+      zoom: 13,
       styles: [
         { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
         { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
@@ -43,7 +70,7 @@ export default class Map extends React.Component {
         {
           featureType: 'poi',
           elementType: 'labels.text.fill',
-          stylers: [{ visibility: "off" }] //not working
+          stylers: [{ visibility: 'off' }] // not working
         },
         {
           featureType: 'poi.park',
@@ -112,24 +139,41 @@ export default class Map extends React.Component {
         }
       ]
     })
-    this.marker = new google.maps.Marker({
-      // position: busLocation,
-      position: {
-        lat: -41.296924,
-        lng: 174.774102
+    // let coords = busService[this.props.busNumber]
+
+    let servicePathCoordinates = busService[this.props.busNumber]
+    let servicePath = new google.maps.Polyline({
+      path: servicePathCoordinates,
+      geodesic: true,
+      strokeColor: 'yellow',
+      strokeOpacity: 1.0,
+      strokeWeight: 3
+    })
+
+    servicePath.setMap(this.map)
+
+    this.state.services.map((service) => {
+      const moment1 = moment()
+      const moment2 = moment(service.RecordedAtTime)
+      console.log(moment2.format())
+
+      new google.maps.Marker({
+        position: {
+          lat: Number(service.Lat),
+          lng: Number(service.Long)
         },
-      map: this.map,
-      icon: {
-        url: './images/bus-icon2.png',
-        scaledSize: new google.maps.Size(50, 50)
-      },
-      title: 'Bus'
+        map: this.map,
+        icon: {
+          url: (service.HasStarted === false) ? './images/bus-icon-not-in-service.png' : (service.Direction === 'Inbound') ? './images/bus-icon-inbound.png' : './images/bus-icon-outbound.png',
+          scaledSize: new google.maps.Size(30, 30)
+        },
+        title: 'Bus ' + service.ServiceID + '\n' + service.Direction
+      })
     })
   }
   render () {
     return (
       <div>
-        {/* <h3>The Map Component</h3> */}
         <div className="map" style={{width: '80vh', height: '80vh'}} ref="map" > I should show a Map</div>
       </div>
     )
