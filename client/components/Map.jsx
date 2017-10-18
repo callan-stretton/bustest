@@ -27,6 +27,7 @@ export default class Map extends React.Component {
     console.log(this.props.busNumber)
     if (this.props.busNumber) {
       getBusLocation(this.props.busNumber, (err, data) => {
+        // this.state.services.forEach(service => service.setMap(null))
         this.setState({ services: data.Services })
       })
     } else this.setState({services: []})
@@ -40,7 +41,7 @@ export default class Map extends React.Component {
     this.updateBus()
   }
   componentDidUpdate () {
-    this.loadMap(this.state.center)
+    this.renderServices()
   }
   loadMap (center) {
     console.log(this.state)
@@ -129,24 +130,32 @@ export default class Map extends React.Component {
       ]
     })
     // let coords = busService[this.props.busNumber]
-
+    this.renderServices()
+    
+  }
+  renderServices() {
     let servicePathCoordinates = busService[this.props.busNumber]
-    let servicePath = new google.maps.Polyline({
+    if (this.servicePath) this.servicePath.setMap(null)
+    this.servicePath = new google.maps.Polyline({
       path: servicePathCoordinates,
       geodesic: true,
       strokeColor: 'yellow',
       strokeOpacity: 1.0,
       strokeWeight: 3
     })
-
-    servicePath.setMap(this.map)
-
-    this.state.services.map((service) => {
+    console.log(this.markers)
+    this.servicePath.setMap(this.map)
+    if (this.markers){
+      this.markers.forEach(marker => {
+        if (marker.hasOwnProperty('setMap')) marker.setMap(null); marker.setVisible(false)
+      })
+    } 
+    this.markers = this.state.services.map((service) => {
       const moment1 = moment()
       const moment2 = moment(service.RecordedAtTime)
       console.log(moment2.format())
 
-      new google.maps.Marker({
+      return new google.maps.Marker({
         position: {
           lat: Number(service.Lat),
           lng: Number(service.Long)

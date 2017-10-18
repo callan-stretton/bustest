@@ -24,3 +24,5 @@ module.exports = {
   43: bus43,
   44: bus43
 }
+
+// http://www.gpsvisualizer.com/convert_input
