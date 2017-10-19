@@ -13,6 +13,8 @@ export default class Map extends React.Component {
         lat: -41.2975,
         lng: 174.7762
       },
+      inBoundStops: [],
+      outBoundStops: [],
       isInbound: props.isInbound,
       services: []
     }
@@ -29,7 +31,7 @@ export default class Map extends React.Component {
     if (busNumber || this.props.busNumber) {
       getBusLocation(busNumber || this.props.busNumber, (err, data) => {
         // this.state.services.forEach(service => service.setMap(null))
-        this.setState({ services: data.Services })
+        this.setState({ services: data.Services, inBoundStops: data.inboundStops.coords, outBoundStops: data.outboundStops.coords })
       })
     } else this.setState({services: []})
   }
@@ -46,7 +48,6 @@ export default class Map extends React.Component {
     this.renderServices()
   }
   loadMap (center) {
-    console.log(this.state)
     this.map = new google.maps.Map(this.refs.map, {
       center: center,
       zoom: 13,
@@ -136,6 +137,8 @@ export default class Map extends React.Component {
     
   }
   renderServices() {
+    console.log(this.state)
+
     let servicePathCoordinates = busService[this.props.busNumber]
     if (this.servicePath) this.servicePath.setMap(null)
     this.servicePath = new google.maps.Polyline({

@@ -14,9 +14,11 @@ server.use('/api/bus/:number', (req, res) => {
       if (err) {
         console.log(err)
       } else {
-        res.json(response.body)
+        res.json({ Services: response.body.Services, inboundStops: require(`./busStops/bus-${req.params.number}-in`), outboundStops: require(`./busStops/bus-${req.params.number}-out`)})
       }
     })
 })
+
+console.log(require('./busStops/bus-44-out'))
 
 module.exports = server
