@@ -19,6 +19,4 @@ server.use('/api/bus/:number', (req, res) => {
     })
 })
 
-console.log(require('./busStops/bus-44-out'))
-
 module.exports = server

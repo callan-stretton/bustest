@@ -27,7 +27,6 @@ export default class Map extends React.Component {
     }, 10000)
   }
   updateBus (busNumber) {
-    console.log(this.props.busNumber)
     if (busNumber || this.props.busNumber) {
       getBusLocation(busNumber || this.props.busNumber, (err, data) => {
         // this.state.services.forEach(service => service.setMap(null))
@@ -137,7 +136,6 @@ export default class Map extends React.Component {
     
   }
   renderServices() {
-    console.log(this.state)
 
     let servicePathCoordinates = busService[this.props.busNumber]
     if (this.servicePath) this.servicePath.setMap(null)
@@ -167,6 +165,26 @@ export default class Map extends React.Component {
           scaledSize: new google.maps.Size(30, 30)
         },
         title: 'Bus ' + service.ServiceID + '\n' + service.Direction
+      })
+    })
+    if (this.stops) {
+      this.stops.forEach(stop => {
+        if (stop.hasOwnProperty('setMap')) stop.setMap(null); stop.setVisible(false)
+      })
+    } 
+    let stops = this.state[this.state.isInbound ? 'inBoundStops' : 'outBoundStops']
+    this.stops = stops.map((service) => {
+      return new google.maps.Marker({
+        position: {
+          lat: Number(service.lat),
+          lng: Number(service.lng)
+        },
+        map: this.map,
+        icon: {
+          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Bus_Sign.svg/2000px-Bus_Sign.svg.png',
+          scaledSize: new google.maps.Size(10, 10)
+        },
+        title: 'stop ' + service.stopNumber + '\n'
       })
     })
   }
