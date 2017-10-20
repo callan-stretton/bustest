@@ -22,7 +22,8 @@ module.exports = {
   17: bus17,
   24: bus24,
   43: bus43,
-  44: bus43
+  44: bus43,
+  KPL: bus43
 }
 
 // http://www.gpsvisualizer.com/convert_input
