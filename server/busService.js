@@ -10,6 +10,7 @@ import bus17 from './bus-routes/bus17' // not correct route ?
 import bus24 from './bus-routes/bus24'
 import bus43 from './bus-routes/bus43' // also bus 44
 import busKPL from './bus-routes/busKPL'
+import busHVL from './bus-routes/busHVL'
 
 module.exports = {
   1: bus1,
@@ -24,7 +25,8 @@ module.exports = {
   24: bus24,
   43: bus43,
   44: bus43,
-  KPL: busKPL
+  KPL: busKPL,
+  HVL: busHVL
 }
 
 // http://www.gpsvisualizer.com/convert_input
