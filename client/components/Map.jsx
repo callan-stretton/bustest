@@ -13,6 +13,9 @@ export default class Map extends React.Component {
         lat: -41.2975,
         lng: 174.7762
       },
+      inBoundStops: [],
+      outBoundStops: [],
+      isInbound: props.isInbound,
       services: []
     }
   }
@@ -23,11 +26,11 @@ export default class Map extends React.Component {
       if (this.props.busNumber) this.updateBus()
     }, 10000)
   }
-  updateBus () {
-    console.log(this.props.busNumber)
-    if (this.props.busNumber) {
-      getBusLocation(this.props.busNumber, (err, data) => {
-        this.setState({ services: data.Services })
+  updateBus (busNumber) {
+    if (busNumber || this.props.busNumber) {
+      getBusLocation(busNumber || this.props.busNumber, (err, data) => {
+        // this.state.services.forEach(service => service.setMap(null))
+        this.setState({ services: data.Services, inBoundStops: data.inboundStops.coords, outBoundStops: data.outboundStops.coords })
       })
     } else this.setState({services: []})
   }
@@ -37,13 +40,13 @@ export default class Map extends React.Component {
     this.updateBus()
   }
   componentWillReceiveProps (props) {
-    this.updateBus()
+    this.updateBus(props.busNumber)
+    if (props.isInbound!= this.state.isInbound) this.setState({isInbound: props.isInbound})
   }
   componentDidUpdate () {
-    this.loadMap(this.state.center)
+    this.renderServices()
   }
   loadMap (center) {
-    console.log(this.state)
     this.map = new google.maps.Map(this.refs.map, {
       center: center,
       zoom: 13,
@@ -129,24 +132,29 @@ export default class Map extends React.Component {
       ]
     })
     // let coords = busService[this.props.busNumber]
+    this.renderServices()
+    
+  }
+  renderServices() {
 
     let servicePathCoordinates = busService[this.props.busNumber]
-    let servicePath = new google.maps.Polyline({
+    if (this.servicePath) this.servicePath.setMap(null)
+    this.servicePath = new google.maps.Polyline({
       path: servicePathCoordinates,
       geodesic: true,
       strokeColor: 'yellow',
       strokeOpacity: 1.0,
       strokeWeight: 3
     })
-
-    servicePath.setMap(this.map)
-
-    this.state.services.map((service) => {
-      const moment1 = moment()
-      const moment2 = moment(service.RecordedAtTime)
-      console.log(moment2.format())
-
-      new google.maps.Marker({
+    this.servicePath.setMap(this.map)
+    if (this.markers){
+      this.markers.forEach(marker => {
+        if (marker.hasOwnProperty('setMap')) marker.setMap(null); marker.setVisible(false)
+      })
+    } 
+    console.log(this.state.services)
+    this.markers = this.state.services.filter(service => service.Direction == (this.state.isInbound ? "Inbound" : 'Outbound')).map((service) => {
+      return new google.maps.Marker({
         position: {
           lat: Number(service.Lat),
           lng: Number(service.Long)
@@ -157,6 +165,26 @@ export default class Map extends React.Component {
           scaledSize: new google.maps.Size(30, 30)
         },
         title: 'Bus ' + service.ServiceID + '\n' + service.Direction
+      })
+    })
+    if (this.stops) {
+      this.stops.forEach(stop => {
+        if (stop.hasOwnProperty('setMap')) stop.setMap(null); stop.setVisible(false)
+      })
+    } 
+    let stops = this.state[this.state.isInbound ? 'inBoundStops' : 'outBoundStops']
+    this.stops = stops.map((service) => {
+      return new google.maps.Marker({
+        position: {
+          lat: Number(service.lat),
+          lng: Number(service.lng)
+        },
+        map: this.map,
+        icon: {
+          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Bus_Sign.svg/2000px-Bus_Sign.svg.png',
+          scaledSize: new google.maps.Size(10, 10)
+        },
+        title: 'stop ' + service.stopNumber + '\n'
       })
     })
   }
