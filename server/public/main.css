@@ -16,19 +16,25 @@ body {
 .map {
   margin: 0 auto;
   /* max-width: 900px; */
-  width: '80vh';
-  height: '80vh';
+  /* width: 80vh;
+  height: 80vh; */
 }
 
 .selector {
-   width: "80vh";
-   padding: 5px;
-   font-size: 16px;
-   line-height: 1;
-   border: 0;
-   border-radius: 0;
-   height: 34px;
-   margin-bottom: 20px;
+  width: 40vw;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border: 0;
+  border-radius: 0;
+  height: 34px;
+  margin-bottom: 20px;
+}
+
+.toggle {
+  width: 10vw;
+  height: 3vh;
+  font-size: 16px;
 }
 
 .legend {
