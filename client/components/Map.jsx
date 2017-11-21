@@ -158,7 +158,7 @@ export default class Map extends React.Component {
         },
         map: this.map,
         icon: {
-          url: (service.HasStarted === false) ? './images/bus-icon-not-in-service.png' : (service.Direction === 'Inbound') ? './images/bus-icon-inbound.png' : './images/bus-icon-outbound.png',
+          url: (isNaN(service.ServiceID) === false) ? (service.HasStarted === false) ? './images/bus-icon-not-in-service.png' : (service.Direction === 'Inbound') ? './images/bus-icon-inbound.png' : './images/bus-icon-outbound.png' : (service.HasStarted === false) ? './images/train-icon-not-in-service.png' : (service.Direction === 'Inbound') ? './images/train-icon-inbound.png' : './images/train-icon-outbound.png',
           scaledSize: new google.maps.Size(30, 30)
         },
         title: (service.BehindSchedule === true) ? 'Running ' + moment("1900-01-01 00:00:00").add(service.DelaySeconds, 'seconds').format("mm:ss") + ' minutes late' : 'On Time'
