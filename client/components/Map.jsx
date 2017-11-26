@@ -41,7 +41,7 @@ export default class Map extends React.Component {
   }
   componentWillReceiveProps (props) {
     this.updateBus(props.busNumber)
-    if (props.isInbound!= this.state.isInbound) this.setState({isInbound: props.isInbound})
+    if (props.isInbound != this.state.isInbound) this.setState({isInbound: props.isInbound})
   }
   componentDidUpdate () {
     this.renderServices()
@@ -131,12 +131,9 @@ export default class Map extends React.Component {
         }
       ]
     })
-    // let coords = busService[this.props.busNumber]
     this.renderServices()
-    
   }
-  renderServices() {
-
+  renderServices () {
     let servicePathCoordinates = busService[this.props.busNumber]
     if (this.servicePath) this.servicePath.setMap(null)
     this.servicePath = new google.maps.Polyline({
@@ -147,13 +144,13 @@ export default class Map extends React.Component {
       strokeWeight: 3
     })
     this.servicePath.setMap(this.map)
-    if (this.markers){
+    if (this.markers) {
       this.markers.forEach(marker => {
         if (marker.hasOwnProperty('setMap')) marker.setMap(null); marker.setVisible(false)
       })
-    } 
+    }
     console.log(this.state.services)
-    this.markers = this.state.services.filter(service => service.Direction == (this.state.isInbound ? "Inbound" : 'Outbound')).map((service) => {
+    this.markers = this.state.services.filter(service => service.Direction == (this.state.isInbound ? 'Inbound' : 'Outbound')).map((service) => {
       return new google.maps.Marker({
         position: {
           lat: Number(service.Lat),
@@ -161,32 +158,33 @@ export default class Map extends React.Component {
         },
         map: this.map,
         icon: {
-          url: (service.HasStarted === false) ? './images/bus-icon-not-in-service.png' : (service.Direction === 'Inbound') ? './images/bus-icon-inbound.png' : './images/bus-icon-outbound.png',
+          url: (isNaN(service.ServiceID) === false) ? (service.HasStarted === false) ? './images/bus-icon-not-in-service.png' : (service.Direction === 'Inbound') ? './images/bus-icon-inbound.png' : './images/bus-icon-outbound.png' : (service.HasStarted === false) ? './images/train-icon-not-in-service.png' : (service.Direction === 'Inbound') ? './images/train-icon-inbound.png' : './images/train-icon-outbound.png',
           scaledSize: new google.maps.Size(30, 30)
         },
-        title: 'Bus ' + service.ServiceID + '\n' + service.Direction
+        title: (service.BehindSchedule === true) ? 'Running ' + moment("1900-01-01 00:00:00").add(service.DelaySeconds, 'seconds').format("mm:ss") + ' minutes late' : 'On Time'
       })
     })
     if (this.stops) {
       this.stops.forEach(stop => {
         if (stop.hasOwnProperty('setMap')) stop.setMap(null); stop.setVisible(false)
       })
-    } 
-    let stops = this.state[this.state.isInbound ? 'inBoundStops' : 'outBoundStops']
-    this.stops = stops.map((service) => {
-      return new google.maps.Marker({
-        position: {
-          lat: Number(service.lat),
-          lng: Number(service.lng)
-        },
-        map: this.map,
-        icon: {
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Bus_Sign.svg/2000px-Bus_Sign.svg.png',
-          scaledSize: new google.maps.Size(10, 10)
-        },
-        title: 'stop ' + service.stopNumber + '\n'
-      })
-    })
+    }
+    // Render Bus Stops (Some are slightly wrong)
+    // let stops = this.state[this.state.isInbound ? 'inBoundStops' : 'outBoundStops']
+    // this.stops = stops.map((service) => {
+    //   return new google.maps.Marker({
+    //     position: {
+    //       lat: Number(service.lat),
+    //       lng: Number(service.lng)
+    //     },
+    //     map: this.map,
+    //     icon: {
+    //       url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Bus_Sign.svg/2000px-Bus_Sign.svg.png',
+    //       scaledSize: new google.maps.Size(10, 10)
+    //     },
+    //     title: 'stop ' + service.stopNumber + '\n'
+    //   })
+    // })
   }
   render () {
     return (
@@ -196,3 +194,6 @@ export default class Map extends React.Component {
     )
   }
 }
+
+
+// moment.duration(service.DelaySeconds).format("mm:ss") + ' minutes late' : 'On Time'

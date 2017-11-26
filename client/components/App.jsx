@@ -42,7 +42,7 @@ export default class App extends React.Component {
             <option value="WRL">WRL Masterton - Wellington</option>
           </select>
         </form>
-        <button onClick={this.toggleInbound.bind(this)} className='toggle'>{this.state.isInbound ? "Show Outbound" : "Show Inbound"}</button>
+        <button onClick={this.toggleInbound.bind(this)} className='toggle'>{this.state.isInbound ? 'Show Outbound' : 'Show Inbound'}</button>
         <Map busNumber={this.state.busNumber} isInbound={this.state.isInbound} />
         <div className="legend">
           <img src="images/bus-icon-inbound.png" alt="Inbound" height="30" width="30"/>
