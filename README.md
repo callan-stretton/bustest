@@ -26,3 +26,6 @@ A bus location tracking app that grabs real-time API data from Metlink and shows
 - Determining how long it would take you to get from your position to your bus stop
 - Simulate smooth bus-path positions as the data is only pinged every 30 seconds
 - Styling
+
+## Early deployed version:
+[https://callan-bus.herokuapp.com](https://callan-bus.herokuapp.com)
