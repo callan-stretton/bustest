@@ -18,7 +18,9 @@ A bus location tracking app that grabs real-time API data from Metlink and shows
 
 ## In development 
 
-- Deployment
+- ~~First Deployment~~
+- Make mobile friendly
+- Second Deployment
 - More bus services
 - Locate the user
 - Determining how long it would take you to get from your position to your bus stop
