@@ -7,6 +7,7 @@ import bus7 from './bus-routes/bus7'
 import bus8 from './bus-routes/bus8'
 import bus14 from './bus-routes/bus14'
 import bus17 from './bus-routes/bus17' // not correct route ?
+import bus18 from './bus-routes/bus18'
 import bus24 from './bus-routes/bus24'
 import bus43 from './bus-routes/bus43' // also bus 44
 import busKPL from './bus-routes/busKPL'
@@ -25,6 +26,7 @@ module.exports = {
   8: bus8,
   14: bus14,
   17: bus17,
+  18: bus18,
   24: bus24,
   43: bus43,
   44: bus43,
