@@ -30,6 +30,7 @@ export default class App extends React.Component {
             <option value="6">6 Lyall Bay - Wellington</option>
             <option value="7">7 Kingston - Wellington</option>
             <option value="8">8 Kowhai Park - Wellington</option>
+            <option value="10">10 Newtown - Wellington</option>
             <option value="14">14 Rongotai - Wellington - Wilton</option>
             <option value="17">17 Victoria University - Wellington</option>
             <option value="18">18 Miramar - Karori</option>
