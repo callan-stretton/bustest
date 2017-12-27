@@ -8,7 +8,7 @@ import bus8 from './bus-routes/bus8'
 import bus10 from './bus-routes/bus10'
 import bus11 from './bus-routes/bus11'
 import bus14 from './bus-routes/bus14'
-import bus17 from './bus-routes/bus17' // not correct route ?
+import bus17 from './bus-routes/bus17'
 import bus18 from './bus-routes/bus18'
 import bus23 from './bus-routes/bus23'
 import bus24 from './bus-routes/bus24'
