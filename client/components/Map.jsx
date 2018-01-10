@@ -15,6 +15,7 @@ export default class Map extends React.Component {
       },
       inBoundStops: [],
       outBoundStops: [],
+      direction: props.direction,
       isInbound: props.isInbound,
       services: []
     }
