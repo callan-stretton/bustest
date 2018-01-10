@@ -8,10 +8,14 @@ export default class App extends React.Component {
     this.state = {
       busNumber: null,
       isInbound: false,
+      direction: 'both'
     }
   }
   toggleInbound() {
     this.setState({isInbound: !this.state.isInbound})
+  }
+  updateDirection() {
+    this.setState({busNumber: e.target.value})
   }
   updateBusNumber(e) {
     this.setState({busNumber: e.target.value})
