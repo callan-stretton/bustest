@@ -21,6 +21,11 @@ export default class App extends React.Component {
       <div className='appContainer'>
         <h1 className='appTitle'>Where is my bus?</h1>
         <form>
+          <select onChange={this.updateBusNumber.bind(this)} name="BusService" className="selector">
+            <option selected value='both'>Both Directions</option>
+            <option value='inbound'>Inbound</option>
+            <option value='outbound'>Outbound</option>
+          </select>
           <select onChange={this.updateBusNumber.bind(this)}name="BusService" className="selector">
             <option selected disabled >Bus Service</option>
             <option value="1">1 Island Bay - Wellington</option>
