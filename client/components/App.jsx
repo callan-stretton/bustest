@@ -25,11 +25,6 @@ export default class App extends React.Component {
       <div className='appContainer'>
         <h1 className='appTitle'>Where is my bus?</h1>
         <form>
-          <select onChange={this.updateDirection.bind(this)} className="selector">
-            <option selected value='both'>Both Directions</option>
-            <option value='inbound'>Inbound</option>
-            <option value='outbound'>Outbound</option>
-          </select>
           <select onChange={this.updateBusNumber.bind(this)}name="BusService" className="selector">
             <option selected disabled >Bus Service</option>
             <option value="1">1 Island Bay - Wellington</option>
@@ -56,7 +51,14 @@ export default class App extends React.Component {
             <option value="MEL">MEL Melling - Wellington</option>
             <option value="WRL">WRL Masterton - Wellington</option>
           </select>
+          {/* <br/>
+          <select onChange={this.updateDirection.bind(this)}>
+            <option selected value='both'>Both Directions</option>
+            <option value='inbound'>Inbound</option>
+            <option value='outbound'>Outbound</option>
+          </select> <h5>in development (not working)</h5> */}
         </form>
+        <button onClick={this.toggleInbound.bind(this)} className='toggle'>{this.state.isInbound ? 'Show Outbound' : 'Show Inbound'}</button>
         <Map busNumber={this.state.busNumber} direction={this.state.direction} isInbound={this.state.isInbound} />
         <div className="legend">
           <img src="images/bus-icon-inbound.png" alt="Inbound" height="30" width="30"/>
