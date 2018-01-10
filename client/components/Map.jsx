@@ -15,6 +15,7 @@ export default class Map extends React.Component {
       },
       inBoundStops: [],
       outBoundStops: [],
+      direction: props.direction,
       isInbound: props.isInbound,
       services: []
     }
@@ -30,7 +31,7 @@ export default class Map extends React.Component {
     if (busNumber || this.props.busNumber) {
       getBusLocation(busNumber || this.props.busNumber, (err, data) => {
         // this.state.services.forEach(service => service.setMap(null))
-        this.setState({ services: data.Services, inBoundStops: data.inboundStops.coords, outBoundStops: data.outboundStops.coords })
+        this.setState({services: data.Services, inBoundStops: data.inboundStops.coords, outBoundStops: data.outboundStops.coords})
       })
     } else this.setState({services: []})
   }
