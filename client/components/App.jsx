@@ -3,7 +3,7 @@ import React from 'react'
 import Map from './Map'
 
 export default class App extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       busNumber: null,
@@ -11,21 +11,21 @@ export default class App extends React.Component {
       direction: 'both'
     }
   }
-  toggleInbound() {
+  toggleInbound () {
     this.setState({isInbound: !this.state.isInbound})
   }
-  updateDirection() {
+  updateDirection () {
     this.setState({busNumber: e.target.value})
   }
-  updateBusNumber(e) {
+  updateBusNumber (e) {
     this.setState({busNumber: e.target.value})
   }
-  render() {
+  render () {
     return (
       <div className='appContainer'>
         <h1 className='appTitle'>Where is my bus?</h1>
         <form>
-          <select onChange={this.updateBusNumber.bind(this)} name="BusService" className="selector">
+          <select onChange={this.updateDirection.bind(this)} className="selector">
             <option selected value='both'>Both Directions</option>
             <option value='inbound'>Inbound</option>
             <option value='outbound'>Outbound</option>
@@ -57,7 +57,7 @@ export default class App extends React.Component {
             <option value="WRL">WRL Masterton - Wellington</option>
           </select>
         </form>
-        <Map busNumber={this.state.busNumber} isInbound={this.state.isInbound} />
+        <Map busNumber={this.state.busNumber} direction={this.state.direction} isInbound={this.state.isInbound} />
         <div className="legend">
           <img src="images/bus-icon-inbound.png" alt="Inbound" height="30" width="30"/>
           <h4>Inbound</h4>
@@ -70,6 +70,5 @@ export default class App extends React.Component {
         </div>
       </div>
     )
-
   }
 }
