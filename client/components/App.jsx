@@ -3,29 +3,25 @@ import React from 'react'
 import Map from './Map'
 
 export default class App extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       busNumber: null,
       isInbound: false,
-      direction: 'both'
     }
   }
-  toggleInbound () {
-    this.setState({isInbound: !this.state.isInbound})
+  toggleInbound() {
+    this.setState({ isInbound: !this.state.isInbound })
   }
-  updateDirection () {
-    this.setState({busNumber: e.target.value})
+  updateBusNumber(e) {
+    this.setState({ busNumber: e.target.value })
   }
-  updateBusNumber (e) {
-    this.setState({busNumber: e.target.value})
-  }
-  render () {
+  render() {
     return (
       <div className='appContainer'>
         <h1 className='appTitle'>Where is my bus?</h1>
         <form>
-          <select onChange={this.updateBusNumber.bind(this)}name="BusService" className="selector">
+          <select onChange={this.updateBusNumber.bind(this)} name="BusService" className="selector">
             <option selected disabled >Bus Service</option>
             <option value="1">1 Island Bay - Wellington</option>
             <option value="2">2 Miramar - Wellington</option>
@@ -51,23 +47,17 @@ export default class App extends React.Component {
             <option value="MEL">MEL Melling - Wellington</option>
             <option value="WRL">WRL Masterton - Wellington</option>
           </select>
-          {/* <br/>
-          <select onChange={this.updateDirection.bind(this)}>
-            <option selected value='both'>Both Directions</option>
-            <option value='inbound'>Inbound</option>
-            <option value='outbound'>Outbound</option>
-          </select> <h5>in development (not working)</h5> */}
         </form>
         <button onClick={this.toggleInbound.bind(this)} className='toggle'>{this.state.isInbound ? 'Show Outbound' : 'Show Inbound'}</button>
-        <Map busNumber={this.state.busNumber} direction={this.state.direction} isInbound={this.state.isInbound} />
+        <Map busNumber={this.state.busNumber} isInbound={this.state.isInbound} />
         <div className="legend">
-          <img src="images/bus-icon-inbound.png" alt="Inbound" height="30" width="30"/>
+          <img src="images/bus-icon-inbound.png" alt="Inbound" height="30" width="30" />
           <h4>Inbound</h4>
-          <br/>
-          <img src="images/bus-icon-outbound.png" alt="Inbound" height="30" width="30"/>
+          <br />
+          <img src="images/bus-icon-outbound.png" alt="Inbound" height="30" width="30" />
           <h4>Outbound</h4>
-          <br/>
-          <img src="images/bus-icon-not-in-service.png" alt="Inbound" height="30" width="30"/>
+          <br />
+          <img src="images/bus-icon-not-in-service.png" alt="Inbound" height="30" width="30" />
           <h4>Not in Service</h4>
         </div>
       </div>

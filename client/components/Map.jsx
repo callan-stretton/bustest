@@ -15,7 +15,6 @@ export default class Map extends React.Component {
       },
       inBoundStops: [],
       outBoundStops: [],
-      direction: props.direction,
       isInbound: props.isInbound,
       services: []
     }
@@ -31,9 +30,9 @@ export default class Map extends React.Component {
     if (busNumber || this.props.busNumber) {
       getBusLocation(busNumber || this.props.busNumber, (err, data) => {
         // this.state.services.forEach(service => service.setMap(null))
-        this.setState({services: data.Services, inBoundStops: data.inboundStops.coords, outBoundStops: data.outboundStops.coords})
+        this.setState({ services: data.Services, inBoundStops: data.inboundStops.coords, outBoundStops: data.outboundStops.coords })
       })
-    } else this.setState({services: []})
+    } else this.setState({ services: [] })
   }
   componentDidMount () {
     this.loadMap(this.state.center)
@@ -42,7 +41,7 @@ export default class Map extends React.Component {
   }
   componentWillReceiveProps (props) {
     this.updateBus(props.busNumber)
-    if (props.isInbound != this.state.isInbound) this.setState({isInbound: props.isInbound})
+    if (props.isInbound != this.state.isInbound) this.setState({ isInbound: props.isInbound })
   }
   componentDidUpdate () {
     this.renderServices()
@@ -162,7 +161,7 @@ export default class Map extends React.Component {
           url: (isNaN(service.ServiceID) === false) ? (service.HasStarted === false) ? './images/bus-icon-not-in-service.png' : (service.Direction === 'Inbound') ? './images/bus-icon-inbound.png' : './images/bus-icon-outbound.png' : (service.HasStarted === false) ? './images/train-icon-not-in-service.png' : (service.Direction === 'Inbound') ? './images/train-icon-inbound.png' : './images/train-icon-outbound.png',
           scaledSize: new google.maps.Size(30, 30)
         },
-        title: (service.BehindSchedule === true) ? 'Running ' + moment("1900-01-01 00:00:00").add(service.DelaySeconds, 'seconds').format("mm:ss") + ' minutes late' : 'On Time'
+        title: (service.BehindSchedule === true) ? 'Running ' + moment('1900-01-01 00:00:00').add(service.DelaySeconds, 'seconds').format('mm:ss') + ' minutes late' : 'On Time'
       })
     })
     if (this.stops) {
@@ -190,11 +189,10 @@ export default class Map extends React.Component {
   render () {
     return (
       <div>
-        <div className="map" style={{width: '80vh', height: '80vh'}} ref="map" > I should show a Map</div>
+        <div className="map" style={{ width: '80vh', height: '80vh' }} ref="map" > I should show a Map</div>
       </div>
     )
   }
 }
-
 
 // moment.duration(service.DelaySeconds).format("mm:ss") + ' minutes late' : 'On Time'
