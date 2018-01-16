@@ -41,6 +41,7 @@ export default class App extends React.Component {
             <option value="32">32 (Express) Island Bay - Wellington</option>
             <option value="43">43 Strathmore Park - Wellington - Khandallah (Loop Service)</option>
             <option value="44">44 Strathmore Park - Wellington - Khandallah (Loop Service)</option>
+            <option value="45">45 Ngaio - Wellington</option>
             <option value="KPL">KPL Waikanae - Wellington</option>
             <option value="HVL">HVL Upper Hutt - Wellington</option>
             <option value="JVL">JVL Johnsonville - Wellington</option>
