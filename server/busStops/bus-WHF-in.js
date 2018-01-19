@@ -1,0 +1,1 @@
+module.exports = { "busNumber": "KPL", "coords": [{ "stopNumber": "7099", "lat": -41.283400000, "lng": 174.779160000 }], "isInbound": true }

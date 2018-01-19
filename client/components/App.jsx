@@ -48,6 +48,7 @@ export default class App extends React.Component {
             <option value="JVL">JVL Johnsonville - Wellington</option>
             <option value="MEL">MEL Melling - Wellington</option>
             <option value="WRL">WRL Masterton - Wellington</option>
+            <option value="WHF">WHF Wellington Harbour Ferry</option>
           </select>
         </form>
         <button onClick={this.toggleInbound.bind(this)} className='toggle'>{this.state.isInbound ? 'Show Outbound' : 'Show Inbound'}</button>
