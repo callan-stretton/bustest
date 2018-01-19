@@ -22,6 +22,7 @@ import busHVL from './bus-routes/busHVL'
 import busJVL from './bus-routes/busJVL'
 import busMEL from './bus-routes/busMEL'
 import busWRL from './bus-routes/busWRL'
+import busWHF from './bus-routes/busWHF'
 
 module.exports = {
   1: bus1,
@@ -48,7 +49,8 @@ module.exports = {
   HVL: busHVL,
   JVL: busJVL,
   MEL: busMEL,
-  WRL: busWRL
+  WRL: busWRL,
+  WHF: busWHF
 }
 
 // http://www.gpsvisualizer.com/convert_input
