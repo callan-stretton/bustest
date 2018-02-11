@@ -18,6 +18,7 @@ export default class Map extends React.Component {
       busDirection: props.busDirection,
       services: []
     }
+    this.determiner = this.determiner.bind(this)
   }
 
   startTicking () {
@@ -133,6 +134,13 @@ export default class Map extends React.Component {
     })
     this.renderServices()
   }
+  determiner () {
+    if (this.state.busDirection === 'Both') {
+      return this.state.services
+    } else {
+      return this.state.services.filter(service => service.Direction === (this.state.busDirection === 'Inbound' ? 'Inbound' : 'Outbound'))
+    }
+  }
   renderServices () {
     let servicePathCoordinates = busService[this.props.busNumber]
     if (this.servicePath) this.servicePath.setMap(null)
@@ -150,7 +158,7 @@ export default class Map extends React.Component {
       })
     }
     console.log(this.state.services)
-    this.markers = this.state.services.filter(service => service.Direction == (this.state.busDirection === 'Inbound' ? 'Inbound' : 'Outbound')).map((service) => {
+    this.markers = this.determiner().map((service) => {
       return new google.maps.Marker({
         position: {
           lat: Number(service.Lat),

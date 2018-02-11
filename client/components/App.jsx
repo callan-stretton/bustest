@@ -8,7 +8,7 @@ export default class App extends React.Component {
     this.state = {
       busNumber: null,
       isInbound: false,
-      busDirection: 'both'
+      busDirection: 'Both'
     }
   }
   toggleInbound () {
@@ -55,7 +55,7 @@ export default class App extends React.Component {
             <option value="WHF">WHF Wellington Harbour Ferry</option>
           </select>
           <select onChange={this.changeDirection.bind(this)} name="BusDirection" className="selector">
-            <option selected value="both" >Both</option>
+            <option selected value="Both" >Both</option>
             <option value="Inbound">Inbound</option>
             <option value="Outbound">Outbound</option>
           </select>
