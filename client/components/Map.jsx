@@ -51,6 +51,7 @@ export default class Map extends React.Component {
     this.map = new google.maps.Map(this.refs.map, {
       center: center,
       zoom: 13,
+      disableDefaultUI: true,
       styles: [
         { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
         { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
