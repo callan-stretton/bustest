@@ -9,6 +9,7 @@ export default class Map extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      zoom: props.zoom,
       center: {
         lat: -41.2975,
         lng: 174.7762
@@ -36,21 +37,25 @@ export default class Map extends React.Component {
     } else this.setState({ services: [] })
   }
   componentDidMount () {
-    this.loadMap(this.state.center)
+    this.loadMap(this.state.center, this.state.zoom)
     this.startTicking()
     this.updateBus()
   }
   componentWillReceiveProps (props) {
     this.updateBus(props.busNumber)
     if (props.busDirection != this.state.busDirection) this.setState({ busDirection: props.busDirection })
+    if (props.zoom != this.state.zoom) this.setState({ zoom: props.zoom })
+    console.log("component will recieve props and zoom is ", this.state.zoom)
   }
   componentDidUpdate () {
     this.renderServices()
   }
-  loadMap (center) {
+  loadMap (center, zoom) {
+    console.log("zoom when map loads is ", this.state.zoom)
     this.map = new google.maps.Map(this.refs.map, {
       center: center,
-      zoom: 13,
+      zoom: this.state.zoom,
+      disableDefaultUI: true,
       styles: [
         { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
         { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
