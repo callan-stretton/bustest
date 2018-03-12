@@ -25,13 +25,15 @@ export default class App extends React.Component {
   }
   zoomIn () {
     this.setState({
-      zoom: this.state + 1
+      zoom: this.state.zoom + 1
     })
+    console.log('this.state.zoom = ', this.state.zoom)
   }
   zoomOut () {
     this.setState({
-      zoom: this.state - 1
+      zoom: this.state.zoom - 1
     })
+    console.log('this.state.zoom = ', this.state.zoom)
   }
   render () {
     return (
