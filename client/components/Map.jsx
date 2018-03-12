@@ -9,6 +9,7 @@ export default class Map extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      zoom: 13,
       center: {
         lat: -41.2975,
         lng: 174.7762
@@ -36,7 +37,7 @@ export default class Map extends React.Component {
     } else this.setState({ services: [] })
   }
   componentDidMount () {
-    this.loadMap(this.state.center)
+    this.loadMap(this.state.center, this.state.zoom)
     this.startTicking()
     this.updateBus()
   }
@@ -47,10 +48,10 @@ export default class Map extends React.Component {
   componentDidUpdate () {
     this.renderServices()
   }
-  loadMap (center) {
+  loadMap (center, zoom) {
     this.map = new google.maps.Map(this.refs.map, {
       center: center,
-      zoom: 13,
+      zoom: zoom,
       disableDefaultUI: true,
       styles: [
         { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
