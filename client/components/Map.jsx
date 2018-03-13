@@ -20,6 +20,8 @@ export default class Map extends React.Component {
       services: []
     }
     this.determiner = this.determiner.bind(this)
+    this.zoomIn = this.zoomIn.bind(this)
+    this.zoomOut = this.zoomOut.bind(this)
   }
 
   startTicking () {
@@ -49,6 +51,7 @@ export default class Map extends React.Component {
   }
   componentDidUpdate () {
     this.renderServices()
+    if (this.props.zoom != this.state.zoom) this.setState({ zoom: this.props.zoom })
   }
   loadMap (center, zoom) {
     console.log("zoom when map loads is ", this.state.zoom)
@@ -139,6 +142,14 @@ export default class Map extends React.Component {
     })
     this.renderServices()
   }
+  zoomIn () {
+    let currentZoomLevel = this.map.getZoom()
+    this.map.setZoom(currentZoomLevel + 1)
+  }
+  zoomOut () {
+    let currentZoomLevel = this.map.getZoom()
+    this.map.setZoom(currentZoomLevel - 1)
+  }
   determiner () {
     if (this.state.busDirection === 'Both') {
       return this.state.services
@@ -203,6 +214,8 @@ export default class Map extends React.Component {
     return (
       <div>
         <div className="map" style={{ width: '80vh', height: '80vh' }} ref="map" > I should show a Map</div>
+        <button onClick={this.zoomIn}>+</button>
+        <button onClick={this.zoomOut}>-</button>
       </div>
     )
   }

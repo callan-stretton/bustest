@@ -76,10 +76,10 @@ export default class App extends React.Component {
           </select>
         </form>
         <Map busNumber={this.state.busNumber} busDirection={this.state.busDirection} zoom={this.state.zoom}/>
-        <div className="controls">
+        {/* <div className="controls">
           <button onClick={this.zoomIn}>+</button>
           <button onClick={this.zoomOut}>-</button>
-        </div>
+        </div> */}
         <br />
         <div className="legend">
           <img src="images/bus-icon-inbound.png" alt="Inbound" height="30" width="30" />
