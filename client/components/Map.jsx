@@ -21,6 +21,7 @@ export default class Map extends React.Component {
     }
     this.determiner = this.determiner.bind(this)
     this.zoomIn = this.zoomIn.bind(this)
+    this.zoomOut = this.zoomOut.bind(this)
   }
 
   startTicking () {
@@ -213,8 +214,8 @@ export default class Map extends React.Component {
     return (
       <div>
         <div className="map" style={{ width: '80vh', height: '80vh' }} ref="map" > I should show a Map</div>
-        <button onClick={this.zoomIn}>Zoom In</button>
-        <button onClick={this.zoomOut}>Zoom In</button>
+        <button onClick={this.zoomIn}>+</button>
+        <button onClick={this.zoomOut}>-</button>
       </div>
     )
   }
