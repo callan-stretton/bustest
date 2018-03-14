@@ -9,7 +9,6 @@ export default class Map extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      zoom: props.zoom,
       center: {
         lat: -41.2975,
         lng: 174.7762
@@ -39,25 +38,21 @@ export default class Map extends React.Component {
     } else this.setState({ services: [] })
   }
   componentDidMount () {
-    this.loadMap(this.state.center, this.state.zoom)
+    this.loadMap(this.state.center)
     this.startTicking()
     this.updateBus()
   }
   componentWillReceiveProps (props) {
     this.updateBus(props.busNumber)
     if (props.busDirection != this.state.busDirection) this.setState({ busDirection: props.busDirection })
-    if (props.zoom != this.state.zoom) this.setState({ zoom: props.zoom })
-    console.log("component will recieve props and zoom is ", this.state.zoom)
   }
   componentDidUpdate () {
     this.renderServices()
-    if (this.props.zoom != this.state.zoom) this.setState({ zoom: this.props.zoom })
   }
-  loadMap (center, zoom) {
-    console.log("zoom when map loads is ", this.state.zoom)
+  loadMap (center) {
     this.map = new google.maps.Map(this.refs.map, {
       center: center,
-      zoom: this.state.zoom,
+      zoom: 13,
       disableDefaultUI: true,
       styles: [
         { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
@@ -212,10 +207,10 @@ export default class Map extends React.Component {
   }
   render () {
     return (
-      <div>
+      <div className='map-container'>
+        <button className='zoom-controls' onClick={this.zoomIn}>+</button>
+        <button className='zoom-controls' onClick={this.zoomOut}>-</button>
         <div className="map" style={{ width: '80vh', height: '80vh' }} ref="map" > I should show a Map</div>
-        <button onClick={this.zoomIn}>+</button>
-        <button onClick={this.zoomOut}>-</button>
       </div>
     )
   }

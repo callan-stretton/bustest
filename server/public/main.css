@@ -11,6 +11,7 @@ body {
 .appContainer {
   margin: 0 auto;
   max-width: 900px;
+  text-align: center;
 }
 
 .map {
@@ -18,6 +19,10 @@ body {
   /* max-width: 900px; */
   /* width: 80vh;
   height: 80vh; */
+}
+
+.map-container {
+  text-align: center;
 }
 
 .selector {
@@ -41,6 +46,11 @@ body {
   display: flex;
   color: white;
   font-family: 'Arial';
+}
+.zoom-controls {
+  width: 70px;
+  height: 70px;
+  font-size: 36px;
 }
 
 h5 {
