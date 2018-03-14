@@ -9,7 +9,6 @@ export default class Map extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      zoom: props.zoom,
       center: {
         lat: -41.2975,
         lng: 174.7762
