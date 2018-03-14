@@ -208,8 +208,8 @@ export default class Map extends React.Component {
   render () {
     return (
       <div>
-        <button onClick={this.zoomIn}>+</button>
-        <button onClick={this.zoomOut}>-</button>
+        <button className='zoom-controls' onClick={this.zoomIn}>+</button>
+        <button className='zoom-controls' onClick={this.zoomOut}>-</button>
         <div className="map" style={{ width: '80vh', height: '80vh' }} ref="map" > I should show a Map</div>
       </div>
     )
