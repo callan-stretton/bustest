@@ -20,6 +20,10 @@ body {
   height: 80vh; */
 }
 
+.map-container {
+  text-align: center;
+}
+
 .selector {
   width: 40vw;
   padding: 5px;
