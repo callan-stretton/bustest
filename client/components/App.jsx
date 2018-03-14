@@ -54,6 +54,7 @@ export default class App extends React.Component {
             <option value="WRL">WRL Masterton - Wellington</option>
             <option value="WHF">WHF Wellington Harbour Ferry</option>
           </select>
+          <br />
           <select onChange={this.changeDirection.bind(this)} name="BusDirection" className="selector">
             <option selected value="Both" >Both</option>
             <option value="Inbound">Inbound</option>
