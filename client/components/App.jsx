@@ -8,11 +8,8 @@ export default class App extends React.Component {
     this.state = {
       busNumber: null,
       isInbound: false,
-      busDirection: 'Both',
-      zoom: 13
+      busDirection: 'Both'
     }
-    this.zoomIn = this.zoomIn.bind(this)
-    this.zoomOut = this.zoomOut.bind(this)
   }
   toggleInbound () {
     this.setState({ isInbound: !this.state.isInbound })
@@ -22,18 +19,6 @@ export default class App extends React.Component {
   }
   updateBusNumber (e) {
     this.setState({ busNumber: e.target.value })
-  }
-  zoomIn () {
-    this.setState({
-      zoom: this.state.zoom + 1
-    })
-    console.log('this.state.zoom = ', this.state.zoom)
-  }
-  zoomOut () {
-    this.setState({
-      zoom: this.state.zoom - 1
-    })
-    console.log('this.state.zoom = ', this.state.zoom)
   }
   render () {
     return (
@@ -75,11 +60,7 @@ export default class App extends React.Component {
             <option value="Outbound">Outbound</option>
           </select>
         </form>
-        <Map busNumber={this.state.busNumber} busDirection={this.state.busDirection} zoom={this.state.zoom}/>
-        {/* <div className="controls">
-          <button onClick={this.zoomIn}>+</button>
-          <button onClick={this.zoomOut}>-</button>
-        </div> */}
+        <Map busNumber={this.state.busNumber} busDirection={this.state.busDirection}/>
         <br />
         <div className="legend">
           <img src="images/bus-icon-inbound.png" alt="Inbound" height="30" width="30" />

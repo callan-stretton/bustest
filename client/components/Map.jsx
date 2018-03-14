@@ -38,7 +38,7 @@ export default class Map extends React.Component {
     } else this.setState({ services: [] })
   }
   componentDidMount () {
-    this.loadMap(this.state.center, this.state.zoom)
+    this.loadMap(this.state.center)
     this.startTicking()
     this.updateBus()
   }
