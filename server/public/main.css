@@ -10,7 +10,7 @@ body {
 
 .appContainer {
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 750px;
   text-align: center;
 }
 
@@ -49,8 +49,8 @@ body {
   height: 70px;
   font-size: 36px;
 }
-.up-control {
-  width: 80vw;
+.height-control {
+  width: 750px;
   height: 70px;
   font-size: 36px;
 }
