@@ -10,15 +10,12 @@ body {
 
 .appContainer {
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 750px;
   text-align: center;
 }
 
 .map {
-  margin: 0 auto;
-  /* max-width: 900px; */
-  /* width: 80vh;
-  height: 80vh; */
+  text-align: center;
 }
 
 .map-container {
@@ -51,6 +48,14 @@ body {
   width: 70px;
   height: 70px;
   font-size: 36px;
+}
+.height-control {
+  width: 750px;
+  height: 70px;
+  font-size: 36px;
+}
+.map-and-controls {
+  
 }
 
 h5 {
