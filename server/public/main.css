@@ -15,7 +15,7 @@ body {
 }
 
 .map {
-
+  text-align: center;
 }
 
 .map-container {
@@ -46,6 +46,11 @@ body {
 }
 .zoom-controls {
   width: 70px;
+  height: 70px;
+  font-size: 36px;
+}
+.up-control {
+  width: 80vw;
   height: 70px;
   font-size: 36px;
 }
