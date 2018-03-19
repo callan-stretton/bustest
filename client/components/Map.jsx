@@ -21,6 +21,10 @@ export default class Map extends React.Component {
     this.determiner = this.determiner.bind(this)
     this.zoomIn = this.zoomIn.bind(this)
     this.zoomOut = this.zoomOut.bind(this)
+    this.moveUp = this.moveUp.bind(this)
+    this.moveDown = this.moveDown.bind(this)
+    this.moveLeft = this.moveLeft.bind(this)
+    this.moveRight = this.moveRight.bind(this)
   }
 
   startTicking () {
@@ -145,6 +149,33 @@ export default class Map extends React.Component {
     let currentZoomLevel = this.map.getZoom()
     this.map.setZoom(currentZoomLevel - 1)
   }
+  moveUp () {
+    // const currentCenter = JSON.stringify(this.map.getCenter())
+    const currentLat = this.map.getCenter().lat()
+    const currentLng = this.map.getCenter().lng()
+    // console.log('currentLat = ', currentLat)
+    // console.log('currentLng = ', currentLng)
+    const newCoords = new google.maps.LatLng(currentLat + 0.04, currentLng)
+    this.map.panTo(newCoords)
+  }
+  moveDown () {
+    const currentLat = this.map.getCenter().lat()
+    const currentLng = this.map.getCenter().lng()
+    const newCoords = new google.maps.LatLng(currentLat - 0.04, currentLng)
+    this.map.panTo(newCoords)
+  }
+  moveLeft () {
+    const currentLat = this.map.getCenter().lat()
+    const currentLng = this.map.getCenter().lng()
+    const newCoords = new google.maps.LatLng(currentLat, currentLng - 0.04)
+    this.map.panTo(newCoords)
+  }
+  moveRight () {
+    const currentLat = this.map.getCenter().lat()
+    const currentLng = this.map.getCenter().lng()
+    const newCoords = new google.maps.LatLng(currentLat, currentLng + 0.04)
+    this.map.panTo(newCoords)
+  }
   determiner () {
     if (this.state.busDirection === 'Both') {
       return this.state.services
@@ -208,14 +239,16 @@ export default class Map extends React.Component {
   render () {
     return (
       <div className='map-and-controls'>
+        <button className='width-control' onClick={this.moveLeft}>&#9669; Left</button>
         <button className='zoom-controls' onClick={this.zoomOut}>-</button>
         <button className='zoom-controls' onClick={this.zoomIn}>+</button>
+        <button className='width-control' onClick={this.moveRight}>Right &#9659;</button>
         <br />
-        <button className='height-control' onClick={this.zoomIn}>Up</button>
+        <button className='height-control' onClick={this.moveUp}>Up</button>
         <div className='map-container'>
           <div className="map" style={{ width: '100wh', height: '100vh' }} ref="map">I should show a Map</div>
         </div>
-        <button className='height-control' onClick={this.zoomOut}>Down</button>
+        <button className='height-control' onClick={this.moveDown}>Down</button>
       </div>
     )
   }
