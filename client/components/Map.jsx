@@ -21,6 +21,7 @@ export default class Map extends React.Component {
     this.determiner = this.determiner.bind(this)
     this.zoomIn = this.zoomIn.bind(this)
     this.zoomOut = this.zoomOut.bind(this)
+    this.moveUp = this.moveUp.bind(this)
   }
 
   startTicking () {
@@ -145,6 +146,12 @@ export default class Map extends React.Component {
     let currentZoomLevel = this.map.getZoom()
     this.map.setZoom(currentZoomLevel - 1)
   }
+  moveUp () {
+    const currentCenter = JSON.stringify(this.map.getCenter())
+    // const currentCenter = this.map.getCenter().lat
+    console.log('currentCenter = ', currentCenter)
+    // this.map.panTo(this.state.center)
+  }
   determiner () {
     if (this.state.busDirection === 'Both') {
       return this.state.services
@@ -211,7 +218,7 @@ export default class Map extends React.Component {
         <button className='zoom-controls' onClick={this.zoomOut}>-</button>
         <button className='zoom-controls' onClick={this.zoomIn}>+</button>
         <br />
-        <button className='height-control' onClick={this.zoomIn}>Up</button>
+        <button className='height-control' onClick={this.moveUp}>Up</button>
         <div className='map-container'>
           <div className="map" style={{ width: '100wh', height: '100vh' }} ref="map">I should show a Map</div>
         </div>
