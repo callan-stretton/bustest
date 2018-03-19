@@ -155,6 +155,12 @@ export default class Map extends React.Component {
     const newCoords = new google.maps.LatLng(currentLat + 0.04, currentLng)
     this.map.panTo(newCoords)
   }
+  moveDown () {
+    const currentLat = this.map.getCenter().lat()
+    const currentLng = this.map.getCenter().lng()
+    const newCoords = new google.maps.LatLng(currentLat - 0.04, currentLng)
+    this.map.panTo(newCoords)
+  }
   determiner () {
     if (this.state.busDirection === 'Both') {
       return this.state.services
