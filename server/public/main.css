@@ -54,6 +54,11 @@ body {
   height: 70px;
   font-size: 36px;
 }
+.width-control {
+  width: 305px;
+  height: 70px;
+  font-size: 36px;
+}
 .map-and-controls {
   
 }

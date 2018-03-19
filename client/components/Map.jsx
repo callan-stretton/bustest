@@ -237,10 +237,10 @@ export default class Map extends React.Component {
   render () {
     return (
       <div className='map-and-controls'>
-        <button className='zoom-controls' onClick={this.moveLeft}>Left</button>
+        <button className='width-control' onClick={this.moveLeft}>Left</button>
         <button className='zoom-controls' onClick={this.zoomOut}>-</button>
         <button className='zoom-controls' onClick={this.zoomIn}>+</button>
-        <button className='zoom-controls' onClick={this.moveRight}>Right</button>
+        <button className='width-control' onClick={this.moveRight}>Right</button>
         <br />
         <button className='height-control' onClick={this.moveUp}>Up</button>
         <div className='map-container'>
