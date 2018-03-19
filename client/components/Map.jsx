@@ -147,10 +147,13 @@ export default class Map extends React.Component {
     this.map.setZoom(currentZoomLevel - 1)
   }
   moveUp () {
-    const currentCenter = JSON.stringify(this.map.getCenter())
-    // const currentCenter = this.map.getCenter().lat
-    console.log('currentCenter = ', currentCenter)
-    // this.map.panTo(this.state.center)
+    // const currentCenter = JSON.stringify(this.map.getCenter())
+    const currentLat = this.map.getCenter().lat()
+    const currentLng = this.map.getCenter().lng()
+    // console.log('currentLat = ', currentLat)
+    // console.log('currentLng = ', currentLng)
+    const newCoords = new google.maps.LatLng(currentLat + 0.04, currentLng)
+    this.map.panTo(newCoords)
   }
   determiner () {
     if (this.state.busDirection === 'Both') {
