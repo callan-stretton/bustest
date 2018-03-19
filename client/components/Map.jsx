@@ -23,6 +23,8 @@ export default class Map extends React.Component {
     this.zoomOut = this.zoomOut.bind(this)
     this.moveUp = this.moveUp.bind(this)
     this.moveDown = this.moveDown.bind(this)
+    this.moveLeft = this.moveLeft.bind(this)
+    this.moveRight = this.moveRight.bind(this)
   }
 
   startTicking () {
@@ -237,10 +239,10 @@ export default class Map extends React.Component {
   render () {
     return (
       <div className='map-and-controls'>
-        <button className='width-control' onClick={this.moveLeft}>Left</button>
+        <button className='width-control' onClick={this.moveLeft}>&#9669; Left</button>
         <button className='zoom-controls' onClick={this.zoomOut}>-</button>
         <button className='zoom-controls' onClick={this.zoomIn}>+</button>
-        <button className='width-control' onClick={this.moveRight}>Right</button>
+        <button className='width-control' onClick={this.moveRight}>Right &#9659;</button>
         <br />
         <button className='height-control' onClick={this.moveUp}>Up</button>
         <div className='map-container'>
