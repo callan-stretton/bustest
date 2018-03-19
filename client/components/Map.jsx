@@ -156,6 +156,12 @@ export default class Map extends React.Component {
     const newCoords = new google.maps.LatLng(currentLat + 0.04, currentLng)
     this.map.panTo(newCoords)
   }
+  moveDown () {
+    const currentLat = this.map.getCenter().lat()
+    const currentLng = this.map.getCenter().lng()
+    const newCoords = new google.maps.LatLng(currentLat - 0.04, currentLng)
+    this.map.panTo(newCoords)
+  }
   moveLeft () {
     const currentLat = this.map.getCenter().lat()
     const currentLng = this.map.getCenter().lng()
@@ -166,12 +172,6 @@ export default class Map extends React.Component {
     const currentLat = this.map.getCenter().lat()
     const currentLng = this.map.getCenter().lng()
     const newCoords = new google.maps.LatLng(currentLat, currentLng + 0.04)
-    this.map.panTo(newCoords)
-  }
-  moveDown () {
-    const currentLat = this.map.getCenter().lat()
-    const currentLng = this.map.getCenter().lng()
-    const newCoords = new google.maps.LatLng(currentLat - 0.04, currentLng)
     this.map.panTo(newCoords)
   }
   determiner () {
@@ -237,8 +237,10 @@ export default class Map extends React.Component {
   render () {
     return (
       <div className='map-and-controls'>
+        <button className='zoom-controls' onClick={this.moveLeft}>Left</button>
         <button className='zoom-controls' onClick={this.zoomOut}>-</button>
         <button className='zoom-controls' onClick={this.zoomIn}>+</button>
+        <button className='zoom-controls' onClick={this.moveRight}>Right</button>
         <br />
         <button className='height-control' onClick={this.moveUp}>Up</button>
         <div className='map-container'>
