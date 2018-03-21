@@ -25,6 +25,7 @@ export default class Map extends React.Component {
     this.moveDown = this.moveDown.bind(this)
     this.moveLeft = this.moveLeft.bind(this)
     this.moveRight = this.moveRight.bind(this)
+    this.getPanCoordRatio = this.getPanCoordRatio.bind(this)
   }
 
   startTicking () {
@@ -149,39 +150,16 @@ export default class Map extends React.Component {
     let currentZoomLevel = this.map.getZoom()
     this.map.setZoom(currentZoomLevel - 1)
   }
-  moveUp () {
-
-    // 1 =
-    // 2 =
-    // 3 =
-    // 4 = 50.0
-    // 5 =
-    // 6 =
-    // 7 = 5.0
-    // 8 =
-    // 9 =
-    // 10 = 0.5
-    // 11 =
-    // 12 =
-    // 13 = 0.05
-    // 14 =
-    // 15 =
-    // 16 = 0.005
-    // 17 =
-    // 18 =
-    // 19 = 0.0005
-    // 20 =
-    // 21 =
-    // 22 = 0.00005
-
-    const currentCenter = JSON.stringify(this.map.getCenter())
-    console.log('currentCenter = ', currentCenter)
+  getPanCoordRatio () {
     const currentZoomLevel = this.map.getZoom()
-    console.log('currentZoomLevel = ', currentZoomLevel)
     const currentLat = this.map.getCenter().lat()
     const currentLng = this.map.getCenter().lng()
     const panSize = (currentZoomLevel <= 4) ? 50 : (currentZoomLevel <= 7) ? 5 : (currentZoomLevel <= 10) ? 0.5 : (currentZoomLevel <= 13) ? 0.05 : (currentZoomLevel <= 16) ? 0.005 : (currentZoomLevel <= 19) ? 0.0005 : 0.00005
-    const newCoords = new google.maps.LatLng(currentLat + panSize, currentLng)
+    return [currentLat, currentLng, panSize]
+  }
+  moveUp () {
+    const panCoords = this.getPanCoordRatio()
+    const newCoords = new google.maps.LatLng(panCoords[0] + panCoords[2], panCoords[1])
     this.map.panTo(newCoords)
   }
   moveDown () {
