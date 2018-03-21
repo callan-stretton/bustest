@@ -150,10 +150,37 @@ export default class Map extends React.Component {
     this.map.setZoom(currentZoomLevel - 1)
   }
   moveUp () {
-    // const currentCenter = JSON.stringify(this.map.getCenter())
+
+    // 1 =
+    // 2 =
+    // 3 =
+    // 4 = 50.0
+    // 5 =
+    // 6 =
+    // 7 = 5.0
+    // 8 =
+    // 9 =
+    // 10 = 0.5
+    // 11 =
+    // 12 =
+    // 13 = 0.05
+    // 14 =
+    // 15 =
+    // 16 = 0.005
+    // 17 =
+    // 18 =
+    // 19 = 0.0005
+    // 20 =
+    // 21 =
+    // 22 = 0.00005
+
+    const currentCenter = JSON.stringify(this.map.getCenter())
+    console.log('currentCenter = ', currentCenter)
+    const currentZoomLevel = this.map.getZoom()
+    console.log('currentZoomLevel = ', currentZoomLevel)
     const currentLat = this.map.getCenter().lat()
     const currentLng = this.map.getCenter().lng()
-    const newCoords = new google.maps.LatLng(currentLat + 0.04, currentLng)
+    const newCoords = new google.maps.LatLng(currentLat + 500, currentLng)
     this.map.panTo(newCoords)
   }
   moveDown () {
