@@ -25,6 +25,7 @@ export default class Map extends React.Component {
     this.moveDown = this.moveDown.bind(this)
     this.moveLeft = this.moveLeft.bind(this)
     this.moveRight = this.moveRight.bind(this)
+    this.getPanCoordRatio = this.getPanCoordRatio.bind(this)
   }
 
   startTicking () {
@@ -149,31 +150,31 @@ export default class Map extends React.Component {
     let currentZoomLevel = this.map.getZoom()
     this.map.setZoom(currentZoomLevel - 1)
   }
-  moveUp () {
-    // const currentCenter = JSON.stringify(this.map.getCenter())
+  getPanCoordRatio () {
+    const currentZoomLevel = this.map.getZoom()
     const currentLat = this.map.getCenter().lat()
     const currentLng = this.map.getCenter().lng()
-    // console.log('currentLat = ', currentLat)
-    // console.log('currentLng = ', currentLng)
-    const newCoords = new google.maps.LatLng(currentLat + 0.04, currentLng)
+    const panSize = (currentZoomLevel <= 4) ? 50 : (currentZoomLevel <= 7) ? 5 : (currentZoomLevel <= 10) ? 0.5 : (currentZoomLevel <= 13) ? 0.05 : (currentZoomLevel <= 16) ? 0.005 : (currentZoomLevel <= 19) ? 0.0005 : 0.00005
+    return [panSize, currentLat, currentLng]
+  }
+  moveUp () {
+    const panCoords = this.getPanCoordRatio()
+    const newCoords = new google.maps.LatLng(panCoords[1] + panCoords[0], panCoords[2])
     this.map.panTo(newCoords)
   }
   moveDown () {
-    const currentLat = this.map.getCenter().lat()
-    const currentLng = this.map.getCenter().lng()
-    const newCoords = new google.maps.LatLng(currentLat - 0.04, currentLng)
+    const panCoords = this.getPanCoordRatio()
+    const newCoords = new google.maps.LatLng(panCoords[1] - panCoords[0], panCoords[2])
     this.map.panTo(newCoords)
   }
   moveLeft () {
-    const currentLat = this.map.getCenter().lat()
-    const currentLng = this.map.getCenter().lng()
-    const newCoords = new google.maps.LatLng(currentLat, currentLng - 0.04)
+    const panCoords = this.getPanCoordRatio()
+    const newCoords = new google.maps.LatLng(panCoords[1], panCoords[2] - panCoords[0])
     this.map.panTo(newCoords)
   }
   moveRight () {
-    const currentLat = this.map.getCenter().lat()
-    const currentLng = this.map.getCenter().lng()
-    const newCoords = new google.maps.LatLng(currentLat, currentLng + 0.04)
+    const panCoords = this.getPanCoordRatio()
+    const newCoords = new google.maps.LatLng(panCoords[1], panCoords[2] + panCoords[0])
     this.map.panTo(newCoords)
   }
   determiner () {
@@ -246,7 +247,7 @@ export default class Map extends React.Component {
         <br />
         <button className='height-control' onClick={this.moveUp}>Up</button>
         <div className='map-container'>
-          <div className="map" style={{ width: '100wh', height: '100vh' }} ref="map">I should show a Map</div>
+          <div className="map" style={{ width: '750px', height: '750px' }} ref="map">I should show a Map</div>
         </div>
         <button className='height-control' onClick={this.moveDown}>Down</button>
       </div>
