@@ -180,7 +180,8 @@ export default class Map extends React.Component {
     console.log('currentZoomLevel = ', currentZoomLevel)
     const currentLat = this.map.getCenter().lat()
     const currentLng = this.map.getCenter().lng()
-    const newCoords = new google.maps.LatLng(currentLat + 500, currentLng)
+    const panSize = (currentZoomLevel <= 4) ? 50 : (currentZoomLevel <= 7) ? 5 : (currentZoomLevel <= 10) ? 0.5 : (currentZoomLevel <= 13) ? 0.05 : (currentZoomLevel <= 16) ? 0.005 : (currentZoomLevel <= 19) ? 0.0005 : 0.00005
+    const newCoords = new google.maps.LatLng(currentLat + panSize, currentLng)
     this.map.panTo(newCoords)
   }
   moveDown () {
