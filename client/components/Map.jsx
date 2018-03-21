@@ -246,7 +246,7 @@ export default class Map extends React.Component {
         <br />
         <button className='height-control' onClick={this.moveUp}>Up</button>
         <div className='map-container'>
-          <div className="map" style={{ width: '100wh', height: '100vh' }} ref="map">I should show a Map</div>
+          <div className="map" style={{ width: '750px', height: '750px' }} ref="map">I should show a Map</div>
         </div>
         <button className='height-control' onClick={this.moveDown}>Down</button>
       </div>
