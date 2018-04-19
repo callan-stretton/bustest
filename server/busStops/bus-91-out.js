@@ -1,0 +1,1 @@
+module.exports = { "busNumber": "91", "coords": [{ "stopNumber": "7099", "lat": -41.279077, "lng": 174.780423 }] }
