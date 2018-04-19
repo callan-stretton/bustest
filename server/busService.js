@@ -17,6 +17,7 @@ import bus32 from './bus-routes/bus32'
 import bus43 from './bus-routes/bus43' // also bus 44
 import bus45 from './bus-routes/bus45'
 import bus46 from './bus-routes/bus46'
+import bus91 from './bus-routes/bus91'
 import busKPL from './bus-routes/busKPL'
 import busHVL from './bus-routes/busHVL'
 import busJVL from './bus-routes/busJVL'
@@ -45,6 +46,7 @@ module.exports = {
   44: bus43,
   45: bus45,
   46: bus46,
+  91: bus91,
   KPL: busKPL,
   HVL: busHVL,
   JVL: busJVL,
